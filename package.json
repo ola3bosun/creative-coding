@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-all": "npm run b1 && npm run b2 && npm run b3 && npm run b4 && npm run b5",
-    "b1": "canvas-sketch sketch-01.js --build --output dist/01 --name bundle",
-    "b2": "canvas-sketch sketch-02.js --build --output dist/02 --name bundle",
-    "b3": "canvas-sketch sketch-03.js --build --output dist/03 --name bundle",
-    "b4": "canvas-sketch sketch-04.js --build --output dist/04 --name bundle",
-    "b5": "canvas-sketch sketch-05.js --build --output dist/05 --name bundle"
+  "b1": "canvas-sketch sketch-01.js --build --dir dist/01 --name bundle",
+  "b2": "canvas-sketch sketch-02.js --build --dir dist/02 --name bundle",
+  "b3": "canvas-sketch sketch-03.js --build --dir dist/03 --name bundle",
+  "b4": "canvas-sketch sketch-04.js --build --dir dist/04 --name bundle",
+  "b5": "canvas-sketch sketch-05.js --build --dir dist/05 --name bundle"
   },
   "keywords": [],
   "author": "",
