@@ -18,6 +18,38 @@ const params = {
   bgColor: '#ffffff'
 }
 
+var backBtn = document.createElement("button");
+backBtn.textContent = "previous sketch";
+document.body.appendChild(backBtn);
+
+backBtn.style.position = "absolute";
+backBtn.style.top = "20px";
+backBtn.style.left = "20px";
+backBtn.style.padding = "10px 20px";
+backBtn.style.fontSize = "16px";
+backBtn.style.backgroundColor = "#ffffff";
+backBtn.style.border = "2px solid #000000";
+backBtn.style.cursor = "pointer";
+backBtn.addEventListener("click", function() {
+  window.location.href = "dist/03/bundle.html";
+});
+
+var nextBtn = document.createElement("button");
+nextBtn.textContent = "next sketch";
+document.body.appendChild(nextBtn);
+
+nextBtn.style.position = "absolute";
+nextBtn.style.top = "120px";
+nextBtn.style.left = "20px";
+nextBtn.style.padding = "10px 20px";
+nextBtn.style.fontSize = "16px";
+nextBtn.style.backgroundColor = "#ffffff";
+nextBtn.style.border = "2px solid #000000";
+nextBtn.style.cursor = "pointer";
+nextBtn.addEventListener("click", function() {
+  window.location.href = "dist/05/bundle.html";
+});
+
 const settings = {
   dimensions: [ 1080, 1080 ],
   animate: params.animate
