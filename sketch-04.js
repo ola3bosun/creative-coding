@@ -18,37 +18,31 @@ const params = {
   bgColor: '#ffffff'
 }
 
-var backBtn = document.createElement("button");
-backBtn.textContent = "previous sketch";
-document.body.appendChild(backBtn);
+function createNavButton(text, top, link) {
+  const btn = document.createElement("button");
+  btn.textContent = text;
 
-backBtn.style.position = "absolute";
-backBtn.style.top = "20px";
-backBtn.style.left = "20px";
-backBtn.style.padding = "10px 20px";
-backBtn.style.fontSize = "16px";
-backBtn.style.backgroundColor = "#ffffff";
-backBtn.style.border = "2px solid #000000";
-backBtn.style.cursor = "pointer";
-backBtn.addEventListener("click", function() {
-  window.location.href = "../03/bundle.html";
-});
+  Object.assign(btn.style, {
+    position: "absolute",
+    top: top,
+    left: "20px",
+    padding: "10px 20px",
+    fontSize: "16px",
+    backgroundColor: "#ffffff",
+    border: "2px solid #000000",
+    cursor: "pointer",
+  });
 
-var nextBtn = document.createElement("button");
-nextBtn.textContent = "next sketch";
-document.body.appendChild(nextBtn);
+  btn.addEventListener("click", () => {
+    window.location.href = link;
+  });
 
-nextBtn.style.position = "absolute";
-nextBtn.style.top = "120px";
-nextBtn.style.left = "20px";
-nextBtn.style.padding = "10px 20px";
-nextBtn.style.fontSize = "16px";
-nextBtn.style.backgroundColor = "#ffffff";
-nextBtn.style.border = "2px solid #000000";
-nextBtn.style.cursor = "pointer";
-nextBtn.addEventListener("click", function() {
-  window.location.href = "../05/bundle.html";
-});
+  document.body.appendChild(btn);
+  return btn;
+}
+
+createNavButton("back", "20px", "../03/bundle.html");
+createNavButton("next sketch", "120px", "../05/bundle.html");
 
 const settings = {
   dimensions: [ 1080, 1080 ],
