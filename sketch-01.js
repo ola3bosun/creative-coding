@@ -35,7 +35,7 @@ nextBtn.style.backgroundColor = "#ffffff";
 nextBtn.style.border = "2px solid #000000";
 nextBtn.style.cursor = "pointer";
 nextBtn.addEventListener("click", function() {
-  window.location.href = "dist/02/bundle.html";
+  window.location.href = "../02/bundle.html";
 });
 
 const params = {

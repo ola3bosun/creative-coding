@@ -27,7 +27,7 @@ backBtn.style.backgroundColor = "#ffffff";
 backBtn.style.border = "2px solid #000000";
 backBtn.style.cursor = "pointer";
 backBtn.addEventListener("click", function() {
-  window.location.href = "dist/02/bundle.html";
+  window.location.href = "../02/bundle.html";
 });
 
 var nextBtn = document.createElement("button");
@@ -43,7 +43,7 @@ nextBtn.style.backgroundColor = "#ffffff";
 nextBtn.style.border = "2px solid #000000";
 nextBtn.style.cursor = "pointer";
 nextBtn.addEventListener("click", function() {
-  window.location.href = "dist/03/bundle.html";
+  window.location.href = "../03/bundle.html";
 });
 
 const settings = {

@@ -22,7 +22,7 @@ backBtn.style.backgroundColor = "#ffffff";
 backBtn.style.border = "2px solid #000000";
 backBtn.style.cursor = "pointer";
 backBtn.addEventListener("click", function() {
-  window.location.href = "dist/04 /bundle.html";
+  window.location.href = "../04 /bundle.html";
 });
 
 var nextBtn = document.createElement("button");
