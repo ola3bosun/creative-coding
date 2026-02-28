@@ -7,7 +7,11 @@ const params = {
   numCircles: 20,
   lineWidth:  5,
   connectDist: 200,
-  agentRadius: 8
+  agentRadius: 8,
+  edgeBehavior: 'bounce', // 'bounce' or 'wrap'
+  bgColor: '#ffffff',    // Background color
+  lineColor: '#000000',  // Connecting lines color
+  agentColor: '#000000'  // Agent stroke color
 }
 
 function createNavButton(text, top, link) {
@@ -43,41 +47,47 @@ const settings = {
 };
 
 const sketch = ({ context, width, height }) => {
-
   const agents = [];
 
-  let numCircle = params.numCircles;
-  for (let i = 0; i < numCircle; i++){
-
+  // Initial population
+  for (let i = 0; i < params.numCircles; i++){
     const x = random.range(0, width);
     const y = random.range(0, height);
-
     agents.push(new Agent(x, y));
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+    context.fillStyle = params.bgColor;
     context.fillRect(0, 0, width, height);
+
+    // DYNAMICALLY ADD OR REMOVE AGENTS BASED ON TWEAKPANE
+    if (agents.length < params.numCircles) {
+        for (let i = agents.length; i < params.numCircles; i++) {
+            agents.push(new Agent(random.range(0, width), random.range(0, height)));
+        }
+    } else if (agents.length > params.numCircles) {
+        agents.splice(params.numCircles);
+    }
 
     for(let i = 0; i < agents.length; i++){
       const agent = agents[i];
       
       for(let j = i + 1; j < agents.length; j++){
         const other = agents[j];
-
         const dist = agent.pos.getDistance(other.pos);
 
-        //conditional distance between nodes for connecting line
-        if(dist > 200){
+        // USE TWEAKPANE CONNECT DISTANCE
+        if(dist > params.connectDist){
           continue;
         }
         else {
-        context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
-        // context.lineWidth = params.lineWidth; tweakpane
-        context.beginPath();
-        context.moveTo(agent.pos.x, agent.pos.y);
-        context.lineTo(other.pos.x, other.pos.y);
-        context.stroke();
+          // USE TWEAKPANE LINE WIDTH AND CONNECT DISTANCE FOR MAPPING
+          context.lineWidth = math.mapRange(dist, 0, params.connectDist, params.lineWidth, 1);
+          context.beginPath();
+          context.moveTo(agent.pos.x, agent.pos.y);
+          context.lineTo(other.pos.x, other.pos.y);
+          context.strokeStyle = params.lineColor;
+          context.stroke();
         };
       }
     }
@@ -113,38 +123,42 @@ class Agent {
     this.radius = random.range(4, 12);
   }
 
-  // bounds(width, height){
-  //   if(this.pos.x <= 0 || this.pos.x >= width ){
-  //     this.velocity.x *= -1;
-  //   }
-  //   if(this.pos.y <= 0 || this.pos.y >= height) {
-  //     this.velocity.y *= -1;
-  //   }
-  // } // makes circles bounce off the edges
-
   bounds(width, height){
-    if(this.pos.x >= width){
-      this.pos.x = 0;
-    }
-    else if(this.pos.x <= 0){
-      this.pos.x = width;
+    //bounce method    
+    if(params.edgeBehavior === 'bounce'){
+      if(this.pos.x <= 0 || this.pos.x >= width ){
+        this.velocity.x *= -1;
+      }
+      if(this.pos.y <= 0 || this.pos.y >= height) {
+        this.velocity.y *= -1;
+      }
     }
 
-    if(this.pos.y >= height){
-      this.pos.y = 0;
+    //wrap method else 
+    if(params.edgeBehavior === 'wrap'){
+      if(this.pos.x >= width){
+        this.pos.x = 0;
+      }
+      else if(this.pos.x <= 0){
+        this.pos.x = width;
+      }
+
+      if(this.pos.y >= height){
+        this.pos.y = 0;
+      }
+      else if(this.pos.y <= 0){
+        this.pos.y = height;
+      }
     }
-    else if(this.pos.y <= 0){
-      this.pos.y = height;
-    }
-  } // makes circles wrap around the canvas
+  }
 
   update() {
     this.pos.x += this.velocity.x;
     this.pos.y += this.velocity.y;
   }
 
-  draw(context) {
-    context.strokeStyle = 'black';
+ draw(context) {
+    context.strokeStyle = params.agentColor;
 
     context.save();
     context.translate(this.pos.x, this.pos.y);
@@ -152,7 +166,8 @@ class Agent {
     context.lineWidth = 4;
 
     context.beginPath();
-    context.arc(0, 0, this.radius, 0, Math.PI *2);
+
+    context.arc(0, 0, params.agentRadius, 0, Math.PI * 2); 
     context.stroke();
     context.fill();
 
@@ -173,10 +188,19 @@ const createPane = () => {
   folder = pane.addFolder({title: 'settings'});
   folder.addInput(params, 'numCircles', {min: 10, max: 100, step: 1});
   folder.addInput(params, 'lineWidth', {min: 1, max: 20});
-  folder.addInput(params, 'connectDist', {min: 50, max: 400});
-  folder.addInput(params, 'agentRadius', {min: 2, max: 20});
+  folder.addInput(params, 'connectDist', {min: 50, max: 200});
+  folder.addInput(params, 'agentRadius', {min: 2, max: 25});
 
+  folder.addInput(params, 'edgeBehavior', {
+    options: {
+      bounce: 'bounce',
+      wrap: 'wrap'
+    }
+  });
 
+  folder.addInput(params, 'bgColor');
+  folder.addInput(params, 'lineColor');
+  folder.addInput(params, 'agentColor');
 };
 
 createPane();
