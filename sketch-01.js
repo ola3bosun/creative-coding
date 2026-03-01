@@ -6,7 +6,7 @@ const settings = {
   dimensions: [1080, 1080],
 };
 
- function createNavButton(text, top, link) {
+function createNavButton(text, top, link) {
   const btn = document.createElement("button");
   btn.textContent = text;
 

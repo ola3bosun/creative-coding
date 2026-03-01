@@ -1,6 +1,6 @@
 const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
-const math = require('canvas-sketch-util/math')
+const math = require('canvas-sketch-util/math');
 const Tweakpane = require('tweakpane');
 
 const params = {
