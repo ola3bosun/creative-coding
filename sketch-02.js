@@ -100,14 +100,9 @@ const sketch = () => {
 
     const w = params.lineWidth;
     const h = params.lineLength;
-    const radius = params.arcRadius;
     const num = params.numLines;
 
     let currentRadius = params.arcRadius;
-
-    if (params.origin !== 'center') {
-      currentRadius = width /2; // Increase radius for non-centered origins to fill the canvas better
-    }
 
     let activePalette = [];
     if (params.useColor1) activePalette.push(palette[0]);
