@@ -37,8 +37,8 @@ function createNavButton(text, top, link) {
   return btn;
 }
 
-createNavButton("back", "20px", "../02/bundle.html");
-createNavButton("next sketch", "120px", "../04/bundle.html");
+createNavButton("back", "20px", "../02/index.html");
+createNavButton("next sketch", "120px", "../04/index.html");
 
 
 const settings = {

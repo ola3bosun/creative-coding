@@ -32,7 +32,7 @@ function createNavButton(text, top, link) {
   return btn;
 }
 
-createNavButton("back", "20px", "../04/bundle.html");
+createNavButton("back", "20px", "../04/index.html");
 createNavButton("next sketch", "120px", "#");
 
 let manager;

@@ -51,7 +51,7 @@ function createNavButton(text, top, link) {
 };
  
 createNavButton("back", "20px", "../01/bundle.html");
-createNavButton("next sketch", "120px", "../03/bundle.html");
+createNavButton("next sketch", "120px", "../03/index.html");
 
 const settings = {
   dimensions: [ window.innerWidth, window.innerHeight]
